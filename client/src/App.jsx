@@ -1,19 +1,19 @@
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Home from './components/Home';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import Login from './components/login/Login';
+import Signup from './components/signup/Signup';
+import Main from './components/main/main';
 
 function App() {
+  const user = localStorage.getItem("token");
+
   return (
     <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </div>
+      <Routes>
+        {user && <Route path="/" exact element={<Main />} />}
+        <Route path="/signup" exact element={<Signup />} />
+        <Route path="/login" exact element={<Login />} />
+        <Route path="/" element={<Navigate replace to="/login" />} />
+      </Routes>
     </Router>
   );
 }
