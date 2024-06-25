@@ -38,11 +38,7 @@ const Compiler = () => {
       const { data } = await axios.post(`${url}/api/code/run`, payload);
       // console.log(JSON.stringify(data.output.stderr, null, 2));
       setRunning(false);
-      if(data.output.stderr){
-      setOutput(JSON.stringify(data.output.stderr, null, 2));
-      console.log("output",output);
-      }
-      else
+    
       setOutput(data.output)
     } catch (error) {
       console.log(error.response);
@@ -97,11 +93,11 @@ const Compiler = () => {
                   />
                 </Tab>
               )}
-              <Tab key="output" className=" rounded pl-2"title="Output">
+              <Tab key="output" className="pl-2" title="Output">
                 <Textarea
-                  className="w-full mb-2  flex-1 text-black"
+                  className={` w-full mb-2  flex-1 pl-2 ${output.stderr ? 'text-red-500' : 'text-black'}`} 
                   placeholder="Output"
-                  value={output}
+                  value={output.stderr?output.stderr:output}
                   readOnly
                 />
               </Tab>
