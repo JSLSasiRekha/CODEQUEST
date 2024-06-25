@@ -21,11 +21,12 @@ const executeCpp = (filepath,inputPath) => {
             (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Compilation error: ${error}`);
-                    reject({ error, stderr });
+                  
+                    resolve({ error, stderr });
                 }
                 if (stderr) {
                     console.error(`Compilation stderr: ${stderr}`);
-                    reject(stderr);
+                    resolve(stderr);
                 }
                 console.log(`Compilation successful. Output:`);
                 console.log(stdout);

@@ -1,6 +1,7 @@
-import SingleProblem from './singleproblem';
-import Compiler from './Compiler'
+import SingleProblem from '../components/Singleproblem/singleproblem';
+import Compiler from '../components/Singleproblem/Compiler'
 import {useParams } from 'react-router-dom';
+import Navbar from '../components/navbar/Navbar';
 
 const Merged=()=>{
     const { id } = useParams();
@@ -78,6 +79,7 @@ const Merged=()=>{
         return <div>Problem not found</div>;
     }
     return<>
+    <Navbar/>
     <div className='flex bg-[#F1F8E8]'>
         <div className='w-1/2 p-10'>
         <SingleProblem  problem={problem}/>

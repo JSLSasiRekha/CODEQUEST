@@ -14,7 +14,15 @@ const login = async (req, res) => {
     if (!validPassword) return res.status(401).send({ message: "Invalid email or password" });
 
     const token = user.generateAuthToken();
-    res.status(200).send({ data: token, message: "Logged in successfully" });
+    res.cookie('accessToken', token, {
+      httpOnly: true,
+      secure: true, // Set to true if using HTTPS
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+    });
+
+    // Respond with token and user data
+    res.status(200).json({ user: user, token: token, message: "Logged in successfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
   }
@@ -27,5 +35,17 @@ const validate = (data) => {
   });
   return schema.validate(data);
 };
+const logout = async (req, res) => {
+  // delete token
+  await Token.findOneAndDelete({ user: req.user.userId });
+  // remove cookie
+  res.cookie("accessToken", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  
+  res.status(StatusCodes.OK).json({ message: "Logged out!!" });
+};
 
-module.exports = { login };
+
+module.exports = { login ,logout};

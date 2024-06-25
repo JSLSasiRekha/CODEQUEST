@@ -1,6 +1,5 @@
 import { Editor } from "@monaco-editor/react";
 import {
-  Button,
   Select,
   SelectItem,
   Tab,
@@ -36,10 +35,15 @@ const Compiler = () => {
     };
 
     try {
-      const { data } = await axios.post(`${url}/api/compile`, payload);
-      console.log(data);
+      const { data } = await axios.post(`${url}/api/code/run`, payload);
+      // console.log(JSON.stringify(data.output.stderr, null, 2));
       setRunning(false);
-      setOutput(data.output);
+      if(data.output.stderr){
+      setOutput(JSON.stringify(data.output.stderr, null, 2));
+      console.log("output",output);
+      }
+      else
+      setOutput(data.output)
     } catch (error) {
       console.log(error.response);
     }
@@ -57,12 +61,10 @@ const Compiler = () => {
 
   return (
     <Pane>
-      <div className="px-6 bg-gray-800 text-white min-h-screen ">
-        <div className="flex items-center justify-between">
+      <div className="px-6 bg-gray-700 text-white min-h-screen ">
+        <div className="flex flex-row flex-wrap gap-3 ">
         <Select
-          size="sm"
-           
-          className=" mx-[500px] my-3 border-gray-300 focus:border-primary"
+          className="max-w-xs flex-col mx-[500px] w-32  my-3 border-gray-300 focus:border-primary"
           defaultSelectedKeys={["cpp"]}
           placeholder="Cpp"
           onChange={handleLanguageChange}
@@ -76,7 +78,7 @@ const Compiler = () => {
         
         </div>
         <Editor
-          height="70vh"
+          height="65vh"
           language={language}
           theme="vs-dark"
           value={code}
@@ -84,9 +86,9 @@ const Compiler = () => {
         />
         <div className="flex flex-row">
           <div className="flex-[80%]">
-            <Tabs aria-label="Options" className="mt-3">
+            <Tabs aria-label="Options" className="mt-1">
               {!running && (
-                <Tab key="input" title="Input">
+                <Tab key="input" className="pl-2  " title="Input">
                   <Textarea
                     className="w-full mb-2 flex-1 text-black"
                     placeholder="Input"
@@ -95,9 +97,9 @@ const Compiler = () => {
                   />
                 </Tab>
               )}
-              <Tab key="output" title="Output">
+              <Tab key="output" className=" rounded pl-2"title="Output">
                 <Textarea
-                  className="w-full mb-2 flex-1 text-black"
+                  className="w-full mb-2  flex-1 text-black"
                   placeholder="Output"
                   value={output}
                   readOnly
@@ -107,13 +109,13 @@ const Compiler = () => {
 
           </div>
         </div>
-        <div className="flex gap-x-12">
-            <Button  onClick={handleRunCode}>
+        <div className="flex gap-x-6 -mx-2">
+            <button className="bg-gray-500 py-2 w-24 px-4 m-4 rounded " onClick={handleRunCode}>
               Run
-            </Button>
-            <Button onClick={handleSubmitCode}>
+            </button>
+            <button className="bg-[#3bb19b] py-2 w-24 px-4 m-4 rounded " onClick={handleSubmitCode}>
               Submit
-            </Button>
+            </button>
           </div>
       </div>
     </Pane>
