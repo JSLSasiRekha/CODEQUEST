@@ -16,6 +16,7 @@ const CODE_SNIPPETS = {
   cpp: "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\t// code\n\treturn 0;\n}",
   python: "# code",
   java: "public class Main {\n\tpublic static void main(String[] args) {\n\t\t//code\n\t}\n}",
+  c:"#include <stdio.h>\nint main()\n{\n\t// code\n\treturn 0;\n}"
 };
 
 const Compiler = () => {
@@ -69,6 +70,7 @@ const Compiler = () => {
           <SelectItem className="text-white w-16" key="cpp">Cpp</SelectItem>
           <SelectItem className="text-white w-16" key="python">Python</SelectItem>
           <SelectItem className="text-white w-16" key="java">Java</SelectItem>
+          <SelectItem className="text-white w-16" key="c">C</SelectItem>
         </Select>
 
         

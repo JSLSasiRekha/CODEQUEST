@@ -3,6 +3,7 @@ const { generateFile } = require("../execute/generateFile");
 const { executeCpp } = require("../execute/executeCpp");
 const { executeJava } = require("../execute/executeJava");
 const { executePython } = require("../execute/executePy");
+const {executeC}=require('../execute/executeC');
 
 const compile = async (req, res) => {
   const { language, code, input } = req.body;
@@ -13,12 +14,16 @@ const compile = async (req, res) => {
     const filePath = await generateFile(language, code);
     const inputPath = await generateInputFile(input);
     let output;
-    if (language === "cpp") output = await executeCpp(filePath, inputPath);
+    if (language === "cpp")
+       output = await executeCpp(filePath, inputPath);
     else if (language === "java")
       output = await executeJava(filePath, inputPath);
     else if (language === "python")
       output = await executePython(filePath, inputPath);
+    else if(language==='c')
+      output=await executeC(filePath,inputPath);
     res.json({ filePath, inputPath, output });
+   
   } catch (error) {
     res.status(500).json({ error: error });
   }
