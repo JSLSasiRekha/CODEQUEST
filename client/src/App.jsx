@@ -7,8 +7,13 @@ import {useGlobalContext } from "./context";
 import ProfilePage from './pages/ProfilePage'
 
 function App() {
-  const { user } = useGlobalContext();
+  const { user,isLoading } = useGlobalContext();
   console.log(user);
+  if (isLoading) {
+    return (
+      <h1 className="text-2xl text-center text-blue-600 my-40">Loading...</h1>
+    );
+  }else{
   return (
     <Router>
       <Routes>
@@ -26,8 +31,10 @@ function App() {
       </Routes>
      
     </Router>
+  
    
   );
+}
 }
 
 

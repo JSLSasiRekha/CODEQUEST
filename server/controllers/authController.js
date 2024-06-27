@@ -7,6 +7,15 @@ const createJWT = ({ payload }) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, {});
   return token;
 };
+const createTokenUser = (user) => {
+  return {
+    userName: user.userName,
+    userId: user._id,
+    email: user.email,
+    firstName:user.firstName,
+    lastName:user.lastName,
+  };
+};
 
 const login = async (req, res) => {
   try {
@@ -18,8 +27,10 @@ const login = async (req, res) => {
 
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(401).send({ message: "Invalid email or password" });
-    const accessTokenJWT = createJWT({ payload: { user } });
-   
+    const Tokenuser=createTokenUser(user)
+    const accessTokenJWT = createJWT({ payload: {Tokenuser } });
+    user.token=accessTokenJWT;
+    user.save();
     const oneDay = 1000 * 60 * 60 * 24;
     res.cookie("accessToken", accessTokenJWT, {
       httpOnly: true,
@@ -29,7 +40,7 @@ const login = async (req, res) => {
     });
 
     // Respond with token and user data
-    res.status(200).json({ user: user, message: "Logged in successfully" });
+    res.status(200).json({ user: Tokenuser, message: "Logged in successfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
   }

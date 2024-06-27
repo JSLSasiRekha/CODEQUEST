@@ -20,7 +20,10 @@ const Login = () => {
     e.preventDefault();
     try {
      console.log(data);
-	 const response = await axios.post(`${url}/api/auth/login`, data);
+	 const response = await axios.post(`${url}/api/auth/login`, data,
+    {withCredentials:true}
+   );
+   console.log(response)
 	 const { user, token } = response.data; 
 	 saveUser(user); // Save user data to global context
 	 console.log(user); // Log user data

@@ -12,6 +12,7 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
  
   const [user, setUser] = useState(null);
+  const [isLoading,setIsLoading]=useState(true);
 
   const saveUser = (user) => {
     setUser(user);
@@ -25,10 +26,12 @@ const AppProvider = ({ children }) => {
       const { data } = await axios.get(`${url}/api/users/showMe`, {
         withCredentials: true,
       });
+      
       saveUser(data.user);
     } catch (error) {
       removeUser();
     }
+    setIsLoading(false)
   
   }, []);
   useEffect(() => {
@@ -36,9 +39,6 @@ const AppProvider = ({ children }) => {
   }, [fetchUser]);
   const logoutUser = async () => {
     try {
-      await axios.delete(`${url}/api/auth/logout`, {
-        withCredentials: true,
-      });
       removeUser();
     } catch (error) {
       console.log(error);
@@ -52,6 +52,7 @@ const AppProvider = ({ children }) => {
       value={{
         saveUser,
         user,
+        isLoading,
         logoutUser,
       }}
     >

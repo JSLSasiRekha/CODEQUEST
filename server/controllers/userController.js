@@ -85,10 +85,10 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findOne({userName:req.params.username});
     if (!user) return res.status(404).send({ message: "User not found" });
 
-    await User.findByIdAndDelete(req.params.id);
+    await User.findOneAndDelete(req.params.username);
     res.status(200).send({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });

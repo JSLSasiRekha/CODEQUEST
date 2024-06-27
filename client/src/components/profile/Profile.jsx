@@ -1,5 +1,5 @@
 import { useState,useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useGlobalContext } from '../../context';
 import { url } from '../../config';
@@ -51,7 +51,10 @@ const Profile = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+ const handleDelete=async()=>{
+  await axios.delete(`${url}/api/users/${user.userName}`)
+  navigate('/login');
+ }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -63,6 +66,7 @@ const Profile = () => {
       };
       await axios.put(`${url}/api/users/${user.userName}`, updatedUser);
       if(updatedUser.userName){
+        saveUser(updatedUser)
         setUserData({ user: { ...userData.user, ...updatedUser } });
         navigate(`/user/${updatedUser.userName}`)
       }
@@ -88,7 +92,7 @@ const Profile = () => {
   }
 
   return (
-    <div className=" h-[600px] mx-auto px-4 py-8 bg-[#EFF9ED]">
+    <div className=" h-[700px] mx-auto px-4 py-8 bg-[#EFF9ED]">
      
         <img
           className="w-24 h-24 rounded-full mr-4 ml-24"
@@ -198,6 +202,12 @@ const Profile = () => {
           {/* Add more fields as per your user data structure */}
         </div>
       )}
+      <button
+              className="bg-[#3bb19b] hover:bg-[#0a8a73] text-white font-bold py-2 px-4 rounded mt-8 ml-16"
+              onClick={handleDelete}
+            >
+              Delete Account
+            </button>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
-  const token = req.cookies.accessToken;
+  const token = req.signedCookies.accessToken;
   console.log(token);
 
   if (!token) {
@@ -9,9 +9,9 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    const payload = jwt.verify(JSON.stringify(token), process.env.JWT_SECRET);
-    console.log("decoded",payload);
-    req.user = payload.user; // Assuming the token contains user information
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    
+    req.user = payload.Tokenuser; // Assuming the token contains user information
     next();
   } catch (error) {
     res.status(400).json({ message: 'Invalid token.' });
