@@ -86,7 +86,7 @@ const Compiler = () => {
               {!running && (
                 <Tab key="input" className="pl-2  " title="Input">
                   <Textarea
-                    className="w-full mb-2 flex-1 text-black"
+                    className="w-full mb-2 bg-white flex-1 text-black"
                     placeholder="Input"
                     value={`${running ? "Running..." : input}`}
                     onChange={(e) => setInput(e.target.value)}
@@ -95,7 +95,7 @@ const Compiler = () => {
               )}
               <Tab key="output" className="pl-2" title="Output">
                 <Textarea
-                  className={` w-full mb-2  flex-1 pl-2 ${output.stderr ? 'text-red-500' : 'text-black'}`} 
+                  className={` w-full mb-2 bg-white flex-1 pl-2 ${output.stderr ? 'text-red-500' : 'text-black'}`} 
                   placeholder="Output"
                   value={output.stderr?output.stderr:output}
                   readOnly

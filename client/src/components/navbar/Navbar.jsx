@@ -1,13 +1,16 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import styles from "./styles.module.css";
 import { RxAvatar } from "react-icons/rx";
 import { useGlobalContext } from "../../context.jsx"
 
+
 const Navbar=()=>{
+	const navigate= useNavigate();
     const {user, logoutUser } = useGlobalContext();
    const handleLogout = () => {
        localStorage.removeItem("token");
        logoutUser()
+	   navigate('/login')
        window.location.reload();
    };
 

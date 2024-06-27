@@ -1,5 +1,5 @@
 import { useState,useEffect} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useGlobalContext } from '../../context';
 import { url } from '../../config';
@@ -114,7 +114,7 @@ const Profile = () => {
       </div>
       {editing && (
         <form onSubmit={handleSubmit}>
-          <div className="bg-[#EFF9ED] rounded px-8 pt-6 pb-8 mb-4">
+          <div className="bg-[#EFF9ED] h-[400px] rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="userName">
                 User Name
@@ -194,7 +194,7 @@ const Profile = () => {
         </form>
       )}
       {!editing && (
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-12">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-8">
           <p className="mb-4"><span className="font-bold">Username:</span> {userData.user.userName}</p>
           <p className="mb-4"><span className="font-bold">Firstname:</span> {userData.user.firstName}</p>
           <p className="mb-4"><span className="font-bold">Lastname:</span> {userData.user.lastName}</p>

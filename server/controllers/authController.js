@@ -1,4 +1,5 @@
 const { User } = require('../models/user');
+const { StatusCodes } = require("http-status-codes");
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
@@ -54,8 +55,7 @@ const validate = (data) => {
   return schema.validate(data);
 };
 const logout = async (req, res) => {
-  // delete token
-  await Token.findOneAndDelete({ user: req.user.userId });
+  
   // remove cookie
   res.cookie("accessToken", "logout", {
     httpOnly: true,
