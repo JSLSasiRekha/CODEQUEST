@@ -4,11 +4,10 @@ import Signup from './components/signup/Signup';
 import Main from './components/main/main';
 import Merged from './pages/SingleProblem';
 import {useGlobalContext } from "./context";
-import Profile from './components/profile/Profile'
+import ProfilePage from './pages/ProfilePage'
 
 function App() {
   const { user } = useGlobalContext();
-  console.log("hiiii");
   console.log(user);
   return (
     <Router>
@@ -20,7 +19,7 @@ function App() {
           )}
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
-        <Route path="/user/:id" exact element={<Profile/>}/>
+        <Route path="/user/:username" exact element={<ProfilePage/>}/>
         <Route path="/problem/:id" element={<Merged/>}/>
         <Route path="/" element={<Navigate replace to="/login" />} />
         

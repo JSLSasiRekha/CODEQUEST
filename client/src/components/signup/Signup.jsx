@@ -6,6 +6,7 @@ import {url} from "../../config"
 
 const Signup = () => {
 	const [data, setData] = useState({
+		userName:"",
 		firstName: "",
 		lastName: "",
 		email: "",
@@ -67,6 +68,15 @@ const Signup = () => {
 							name="lastName"
 							onChange={handleChange}
 							value={data.lastName}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="text"
+							placeholder="User Name"
+							name="userName"
+							onChange={handleChange}
+							value={data.userName}
 							required
 							className={styles.input}
 						/>

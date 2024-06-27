@@ -1,6 +1,12 @@
 const { User } = require('../models/user');
+const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
+
+const createJWT = ({ payload }) => {
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {});
+  return token;
+};
 
 const login = async (req, res) => {
   try {
@@ -12,17 +18,18 @@ const login = async (req, res) => {
 
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(401).send({ message: "Invalid email or password" });
-
-    const token = user.generateAuthToken();
-    res.cookie('accessToken', token, {
+    const accessTokenJWT = createJWT({ payload: { user } });
+   
+    const oneDay = 1000 * 60 * 60 * 24;
+    res.cookie("accessToken", accessTokenJWT, {
       httpOnly: true,
-      secure: true, // Set to true if using HTTPS
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+      secure: process.env.NODE_ENV === "production",
+      signed: true,
+      expires: new Date(Date.now() + oneDay),
     });
 
     // Respond with token and user data
-    res.status(200).json({ user: user, token: token, message: "Logged in successfully" });
+    res.status(200).json({ user: user, message: "Logged in successfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
   }
