@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth');
 const codeRoutes = require('./routes/compile');
+const problemRoutes=require('./routes/problem');
 
 connection();
 
@@ -26,6 +27,7 @@ app.use(cors(corsOptions));
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/code", codeRoutes);
+app.use("/api/problems",problemRoutes);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
