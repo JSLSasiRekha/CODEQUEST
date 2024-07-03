@@ -13,12 +13,6 @@ router.route('/:id')
   .get(getProblemById)
   .put(updateProblem)
   .delete(deleteProblem);
-  // Problem by slug or ID routes
-
-
-
-
-
 
 
 module.exports = router;
