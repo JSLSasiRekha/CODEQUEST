@@ -7,6 +7,7 @@ import { useGlobalContext } from "../../context.jsx"
 const Navbar=()=>{
 	const navigate= useNavigate();
     const {user, logoutUser } = useGlobalContext();
+	console.log(user)
    const handleLogout = () => {
        localStorage.removeItem("token");
        logoutUser()
@@ -16,6 +17,12 @@ const Navbar=()=>{
 
     return(<nav className={styles.navbar}>
 				<h1>CodeQuest</h1>
+				{user.role==='admin' && <Link to={"/admin-dashboard"}>
+					<RxAvatar
+					size={40}
+					
+					/>
+				</Link>}
 				<Link to={`/user/${user?.userName}`}>
 					<RxAvatar
 					size={40}

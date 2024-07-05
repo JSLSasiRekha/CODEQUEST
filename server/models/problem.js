@@ -31,6 +31,22 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
     
   },
+  ExampleTestCases:[{
+    input: {
+      type: String,
+      required: true,
+    },
+    output: {
+      type: String,
+      required: true,
+    },
+    explanation: {
+      type: String,
+      required: true,
+    },
+  }
+
+  ],
   testCases: [
     {
       input: {
@@ -40,15 +56,8 @@ const ProblemSchema = new mongoose.Schema({
       output: {
         type: String,
         required: true,
-      },
-      hidden: {
-        type: Boolean,
-        default: false,
-      },
-      explanation: {
-        type: String,
-        required: true,
       }
+   
     },
   ],
   constraints: {

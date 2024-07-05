@@ -32,8 +32,7 @@ const updateProblem = async (req, res) => {
 // Create a new problem
 const createProblem = async (req, res) => {
     try {
-      const { title, slug, description, difficulty, tags, companies, solution, constraints } = req.body;
-  
+      const { title, slug, description, difficulty, tags, companies, solution,ExampleTestCases, constraints } = req.body;
       // Check if the slug already exists
       const existingProblem = await Problem.findOne({ slug });
       if (existingProblem) {
@@ -58,8 +57,6 @@ const createProblem = async (req, res) => {
           testCases.push({
             input: inputUrl,
             output: outputUrl,
-            hidden: req.body.hidden[i] === 'true',
-            explanation: req.body.explanation[i]
           });
     
         }
@@ -75,6 +72,7 @@ const createProblem = async (req, res) => {
         tags: tags.split(',').map(tag => tag.trim()), // Convert comma-separated tags to array
         companies: companies.split(',').map(company => company.trim()), // Convert comma-separated companies to array
         solution,
+        ExampleTestCases:ExampleTestCases,
         testCases,
         constraints
       });
