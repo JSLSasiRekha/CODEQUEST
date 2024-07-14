@@ -17,7 +17,7 @@ const executeC = (filepath, inputPath) => {
     return new Promise((resolve, reject) => {
         exec(
             `gcc "${filepath}" -o "${outPath}" && cd "${outputPath}" && "${jobId}.out" < "${inputPath}"`,
-            { shell: "cmd.exe" },
+        
             (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Compilation error: ${error}`);

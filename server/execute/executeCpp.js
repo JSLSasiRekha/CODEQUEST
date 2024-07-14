@@ -17,7 +17,7 @@ const executeCpp = (filepath,inputPath) => {
     
         exec(
             `g++ "${filepath}" -o "${outPath}" && cd "${outputPath}" && "${jobId}.out" < "${inputPath}"`,
-            { shell: "cmd.exe" },
+    
             (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Compilation error: ${error}`);

@@ -31,7 +31,7 @@ const executeJava = (filepath, inputPath) => {
 
         // Compile the Java file
         exec(
-          `javac "${newJavaFile}"`,{ shell: "cmd.exe" },
+          `javac "${newJavaFile}"`,
           (error, stdout, stderr) => {
             if (error) {
               return reject({ step: "compile", error, stderr });
