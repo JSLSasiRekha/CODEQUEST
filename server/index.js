@@ -17,7 +17,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 // Configure CORS to allow requests from the frontend origin
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: 'https://codequest-sasirekha.onrender.com',
   credentials: true,
   optionsSuccessStatus: 200
 };
