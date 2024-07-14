@@ -30,4 +30,4 @@ app.use("/api/code", codeRoutes);
 app.use("/api/problems",problemRoutes);
 
 const port = process.env.PORT || 8000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen({port,host: '0.0.0.0'}, () => console.log(`Listening on port ${port}`));
