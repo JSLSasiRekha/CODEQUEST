@@ -1,13 +1,14 @@
-const Firebase=require('../config')
 const admin = require('firebase-admin');
+const { serviceAccount, storageBucket } = require('../config');
 
-const serviceAccount = require('./codequest-9c7dd-firebase-adminsdk-hx7o6-f682711597.json'); // Your Firebase service account key
+ // Your Firebase service account key
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: Firebase.storageBucket
+  storageBucket: storageBucket
 });
 
 const bucket = admin.storage().bucket();
 
-module.exports ={bucket} ;
+module.exports = {bucket} ;
+

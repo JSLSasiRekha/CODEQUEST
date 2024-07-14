@@ -17,8 +17,8 @@ const SingleProblem = ({ problem }) => {
             <p><strong>Description:</strong><pre className="whitespace-pre-wrap">{problem.description}</pre></p>
 
             <p><strong>Constraints:</strong><pre className="whitespace-pre-wrap">{problem.constraints}</pre></p>
-            {/* <div>
-                {problem.testCases.map((example, index) => (
+            <div>
+                {problem.ExampleTestCases.map((example, index) => (
                     <div key={index}>
                         <p><strong>Example {index + 1}:</strong></p>
                         <p><strong>Input:</strong> <pre className="whitespace-pre-wrap">{JSON.stringify(example.input).replace(/,/g, ', ').replace(/:/g, ': ')}</pre></p>
@@ -26,7 +26,7 @@ const SingleProblem = ({ problem }) => {
                         <p><strong>Explanation:</strong> <pre className="whitespace-pre-wrap">{example.explanation}</pre></p>
                     </div>
                 ))}
-            </div> */}
+            </div>
             <p><strong>Topic:</strong>      <div className="flex">
                     {problem.tags && problem.tags.map((tag, index) => (
                         <p key={index} className="m-2">{tag}</p>

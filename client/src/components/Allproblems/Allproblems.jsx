@@ -2,6 +2,7 @@ import  { useState, useEffect } from 'react';
 import axios from 'axios'; // Import Axios for making HTTP requests
 import Problemheading from './Problemheading';
 import { url } from "../../config";
+import Navbar from '../navbar/Navbar';
 
 const Allproblems = () => {
     const [problems, setProblems] = useState([]);
@@ -21,6 +22,7 @@ const Allproblems = () => {
 
     return (
         <div>
+         
             <h1>All Problems</h1>
             <ul>
                 {problems.map(problem => (

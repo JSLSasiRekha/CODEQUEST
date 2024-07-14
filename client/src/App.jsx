@@ -6,6 +6,8 @@ import Merged from './pages/SingleProblem';
 import {useGlobalContext } from "./context";
 import ProfilePage from './pages/ProfilePage'
 import AdminDashboard from './pages/AdminDashboard';
+import AllProblems from './pages/Allproblems';
+
 
 function App() {
   const { user,isLoading } = useGlobalContext();
@@ -25,6 +27,7 @@ function App() {
           )}
          <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
         <Route path="/signup" exact element={<Signup />} />
+        <Route path="/allproblems" exact element={<AllProblems/>} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/user/:username" exact element={<ProfilePage/>}/>
         <Route path="/problem/:slug" element={<Merged/>}/>

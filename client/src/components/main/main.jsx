@@ -1,17 +1,17 @@
 
 import Allproblems from "../Allproblems/Allproblems";
-
+import { useState } from 'react';
 import Navbar from "../navbar/Navbar";
-
 
 const Main = () => {
 
-
 	return (
 		<div >
-			<Navbar/>
+			<Navbar />
 			<div className="flex w-[1000px]">
-             <Allproblems/>
+
+				<Allproblems />
+				
 			</div>
 		</div>
 	);

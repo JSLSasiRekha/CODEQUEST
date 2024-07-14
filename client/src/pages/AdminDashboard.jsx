@@ -4,7 +4,7 @@ const AdminDashboard=()=>{
    return( <>
    <div className="bg-[rgba(216,239,211,0.4)]">
    <Navbar/>
-   <p>Admin Dashboard</p>
+ 
      <CreateProblem/>
      </div>
     </>

@@ -9,16 +9,16 @@ const Problemheading = ({ id, title, difficulty, companies, tags,slug }) => {
                 <Link to={`/problem/${slug}`} className="text-white no-underline">Solve</Link>
             </button>
             <div className='flex h-[30px]'>
-            <p className="text-gray-500 w-12 pb-7 bg-[rgba(216,239,211,0.4)] px-1 m-1 border border-gray-200 rounded">{difficulty}</p>
+            <p className="text-gray-700 w-[80px] pb-7 bg-[rgba(177,218,169,0.4)] px-1 m-1 border border-gray-200 rounded">{difficulty}</p>
 
-                <p className="text-gray-500 w-36 bg-[rgba(216,239,211,0.4)] pb-7  px-1 m-1 border border-gray-200 rounded">
+                <p className="text-gray-700 w-36 bg-[rgba(177,218,169,0.4)] pb-7  px-1 m-1 border border-gray-200 rounded">
                 <div className="flex gap-2">
                     {companies.map((company, index) => (
                         <p key={index}>{company}</p>
                     ))}
                 </div>
                 </p>
-                <p className="text-gray-500 w-36 pb-7 bg-[rgba(216,239,211,0.4)] px-1 m-1 border border-gray-200 rounded"> <div className="flex gap-2">
+                <p className="text-gray-700 w-36 pb-7 bg-[rgba(177,218,169,0.4)] px-1 m-1 border border-gray-200 rounded"> <div className="flex gap-2">
                     {tags.map((tag, index) => (
                         <p key={index}>{tag}</p>
                     ))}

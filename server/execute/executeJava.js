@@ -57,10 +57,10 @@ const executeJava = (filepath, inputPath) => {
                 runCommand,
                 (error, stdout, stderr) => {
                   if (error) {
-                    return reject({ step: "execute", error, stderr });
+                  resolve({ step: "execute", error, stderr });
                   }
                   if (stderr) {
-                    return reject({ step: "execute", error: stderr });
+                     resolve({ step: "execute", error: stderr });
                   }
 
                   console.log("Java file executed successfully.");

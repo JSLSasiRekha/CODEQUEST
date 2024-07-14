@@ -94,63 +94,159 @@ const CreateProblem= () => {
   
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <div>
-        <label>Title:</label>
-        <input type="text" name="title" value={formData.title} onChange={handleChange} required />
+    <form className="space-y-6 ml-44 p-6 w-3/4 shadow-md rounded-md" onSubmit={handleSubmit} encType="multipart/form-data">
+      <h1 className='text-3xl mt-6 ml-80 text-[#3bb19b] font-bold'>Add A Problem</h1>
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Title:</label>
+        <input
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
       </div>
-      <div>
-        <label>Slug:</label>
-        <input type="text" name="slug" value={formData.slug} onChange={handleChange} required />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Slug:</label>
+        <input
+          type="text"
+          name="slug"
+          value={formData.slug}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
       </div>
-      <div>
-        <label>Description:</label>
-        <textarea name="description" value={formData.description} onChange={handleChange} required />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Description:</label>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
       </div>
-      <div>
-        <label>Difficulty:</label>
-        <select name="difficulty" value={formData.difficulty} onChange={handleChange} required>
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Difficulty:</label>
+        <select
+          name="difficulty"
+          value={formData.difficulty}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
           <option value="Easy">Easy</option>
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
         </select>
       </div>
-      <div>
-        <label>Tags:</label>
-        <input type="text" name="tags" value={formData.tags} onChange={handleChange} placeholder="Comma separated" required />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Tags:</label>
+        <input
+          type="text"
+          name="tags"
+          value={formData.tags}
+          onChange={handleChange}
+          placeholder="Comma separated"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
       </div>
-      <div>
-        <label>Companies:</label>
-        <input type="text" name="companies" value={formData.companies} onChange={handleChange} placeholder="Comma separated" required />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Companies:</label>
+        <input
+          type="text"
+          name="companies"
+          value={formData.companies}
+          onChange={handleChange}
+          placeholder="Comma separated"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
       </div>
-      <div>
-        <label>Solution:</label>
-        <textarea name="solution" value={formData.solution} onChange={handleChange} />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Solution:</label>
+        <textarea
+          name="solution"
+          value={formData.solution}
+          onChange={handleChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
       </div>
-      <div>
-        <label>Example Test Cases:</label>
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Example Test Cases:</label>
         {formData.ExampleTestCases.map((testCase, index) => (
-          <div key={index}>
-            <input type="text" name="input" placeholder="Input" value={testCase.input} onChange={(e) => handleExampleTestCaseChange(index, e)} required />
-            <input type="text" name="output" placeholder="Output" value={testCase.output} onChange={(e) => handleExampleTestCaseChange(index, e)} required />
-            <input type="text" name="explanation" placeholder="Explanation" value={testCase.explanation} onChange={(e) => handleExampleTestCaseChange(index, e)} required />
+          <div key={index} className="space-y-2">
+            <input
+              type="text"
+              name="input"
+              placeholder="Input"
+              value={testCase.input}
+              onChange={(e) => handleExampleTestCaseChange(index, e)}
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+            <input
+              type="text"
+              name="output"
+              placeholder="Output"
+              value={testCase.output}
+              onChange={(e) => handleExampleTestCaseChange(index, e)}
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+            <input
+              type="text"
+              name="explanation"
+              placeholder="Explanation"
+              value={testCase.explanation}
+              onChange={(e) => handleExampleTestCaseChange(index, e)}
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+            />
           </div>
         ))}
-        <button type="button" onClick={addExampleTestCase}>Add Another Example Test Case</button>
+        <button type="button" onClick={addExampleTestCase} className="mt-2 bg-[#3bb19b] hover:bg-[#0a8a73] text-white font-bold py-2 px-4 rounded">
+          Add Another Example Test Case
+        </button>
       </div>
-      <div>
-        <label>Constraints:</label>
-        <textarea name="constraints" value={formData.constraints} onChange={handleChange} required />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Constraints:</label>
+        <textarea
+          name="constraints"
+          value={formData.constraints}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+        />
       </div>
-      <div>
-        <label>Test Case Input Files:</label>
-        <input type="file" name="inputFiles" onChange={handleFileChange} multiple required />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Test Case Input Files:</label>
+        <input
+          type="file"
+          name="inputFiles"
+          onChange={handleFileChange}
+          multiple
+          required
+          className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-green-700 hover:file:bg-blue-100"
+        />
       </div>
-      <div>
-        <label>Test Case Output Files:</label>
-        <input type="file" name="outputFiles" onChange={handleFileChange} multiple required />
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Test Case Output Files:</label>
+        <input
+          type="file"
+          name="outputFiles"
+          onChange={handleFileChange}
+          multiple
+          required
+          className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-green-700 hover:file:bg-blue-100"
+        />
       </div>
-      <button className='bg-[#3BB19B] rounded-sm p-2 ml-6 text-white' type="submit">Submit</button>
+      <button type="submit" className="bg-[#3bb19b] hover:bg-[#0a8a73] text-white font-bold py-2 px-4 rounded">
+        Submit
+      </button>
     </form>
   );
 };

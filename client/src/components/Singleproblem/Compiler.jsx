@@ -42,9 +42,9 @@ const Compiler = () => {
 
     try {
       const { data } = await axios.post(`${url}/api/code/run`, payload);
+      console.log(data)
       // console.log(JSON.stringify(data.output.stderr, null, 2));
       setRunning(false);
-    
       setOutput(data.output)
     } catch (error) {
       console.log(error.response);

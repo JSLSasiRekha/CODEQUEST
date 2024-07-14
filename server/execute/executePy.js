@@ -19,12 +19,12 @@ const executePython = (filepath, inputPath) => {
 
       exec(command, { shell: "cmd.exe" }, (error, stdout, stderr) => {
         if (error) {
-          reject({ error, stderr });
-          return;
+          resolve({ error, stderr });
+         
         }
         if (stderr) {
-          reject(stderr);
-          return;
+          resolve(stderr);
+        
         }
         resolve(stdout);
       }).stdin.end(inputData);

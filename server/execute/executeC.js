@@ -10,22 +10,22 @@ if (!fs.existsSync(outputPath)) {
 
 const executeC = (filepath, inputPath) => {
     const jobId = path.basename(filepath).split(".")[0];
-    const outPath = path.join(outputPath, `${jobId}.exe`);
+    const outPath = path.join(outputPath, `${jobId}.out`);
     console.log("compiling...");
     console.log({ filepath, outPath, outputPath, jobId, inputPath });
     
     return new Promise((resolve, reject) => {
         exec(
-            `gcc "${filepath}" -o "${outPath}" && cd "${outputPath}" && "${jobId}.exe" < "${inputPath}"`,
+            `gcc "${filepath}" -o "${outPath}" && cd "${outputPath}" && "${jobId}.out" < "${inputPath}"`,
             { shell: "cmd.exe" },
             (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Compilation error: ${error}`);
-                    reject({ error, stderr });
+                    resolve({ error, stderr });
                 }
                 if (stderr) {
                     console.error(`Compilation stderr: ${stderr}`);
-                    reject(stderr);
+                    resolve(stderr);
                 }
                 console.log(`Compilation successful. Output:`);
                 console.log(stdout);
