@@ -4,9 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "npm start --prefix …/client",
-  "client:install": "npm install --prefix client",
-  "build": "npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },

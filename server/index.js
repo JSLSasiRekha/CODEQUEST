@@ -28,15 +28,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/code", codeRoutes);
 app.use("/api/problems",problemRoutes);
-if (process.env.MODE === "production") {
-  app.use(express.static(path.join(__dirname, "build")));
-
-  app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "build", "index.html")));
-} else {
-  app.get("/", (req, res) => {
-    res.send("Welcome to the home page");
-  });
-}
 
 const port = process.env.PORT || 8000;
 app.listen({port,host: '0.0.0.0'}, () => console.log(`Listening on port ${port}`));
