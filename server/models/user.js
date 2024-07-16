@@ -10,7 +10,12 @@ const userSchema=new mongoose.Schema({
     role:{type:String,required:true,default:'user'},
    email:{type:String,required:true},
     password:{type:String,required:true},
-    token:{type:String}
+    token:{type:String},
+    points:{type:Number,default:0},
+    streak:{type:Number,default:0},
+    easySolved:{type:Number,default:0},
+    mediumSolved:{type:Number,default:0},
+    hardSolved:{type:Number,default:0}
 })
 
 userSchema.methods.generateAuthToken= function(){

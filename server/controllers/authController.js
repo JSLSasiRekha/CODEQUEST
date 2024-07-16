@@ -16,6 +16,11 @@ const createTokenUser = (user) => {
     firstName:user.firstName,
     lastName:user.lastName,
     role:user.role,
+    easySolved:user.easySolved,
+    mediumSolved:user.mediumSolved,
+    hardSolved:user.hardSolved,
+    points:user.points,
+    streak:user.streak
   };
 };
 

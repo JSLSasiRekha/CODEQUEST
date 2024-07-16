@@ -8,6 +8,7 @@ const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth');
 const codeRoutes = require('./routes/compile');
 const problemRoutes=require('./routes/problem');
+const submissionRoutes=require('./routes/submission');
 
 connection();
 
@@ -17,7 +18,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 // Configure CORS to allow requests from the frontend origin
 const corsOptions = {
-  origin: process.env.ORIGIN,
+  origin: 'http://localhost:8000',
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -28,6 +29,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/code", codeRoutes);
 app.use("/api/problems",problemRoutes);
+app.use("/api/submissions",submissionRoutes)
 
 const port = process.env.PORT || 8000;
 app.listen({port,host: '0.0.0.0'}, () => console.log(`Listening on port ${port}`));

@@ -59,6 +59,7 @@ const submitCode = async (req, res) => {
   try { 
     const filePath = await generateFile(language, code);
   const problemfetched=  await Problem.findOne({ slug: problemSlug });
+  const problemHeading= problemfetched.title;
   if (!problemfetched)
     return res
       .status(StatusCodes.NOT_FOUND)
@@ -125,6 +126,7 @@ const submitCode = async (req, res) => {
       language,
       status,
       problemSlug,
+      problemHeading,
       userId,
      
     });

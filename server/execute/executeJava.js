@@ -34,10 +34,10 @@ const executeJava = (filepath, inputPath) => {
           `javac "${newJavaFile}"`,
           (error, stdout, stderr) => {
             if (error) {
-              return reject({ step: "compile", error, stderr });
+               resolve({ step: "compile", error, stderr });
             }
             if (stderr) {
-              return reject({ step: "compile", error: stderr });
+               resolve({ step: "compile", error: stderr });
             }
 
             console.log("Java file compiled successfully.");
@@ -45,7 +45,7 @@ const executeJava = (filepath, inputPath) => {
             // Read the input file contents
             fs.readFile(inputPath, "utf8", (err, inputData) => {
               if (err) {
-                return reject({ step: "readInput", error: err });
+                resolve({ step: "readInput", error: err });
               }
 
               console.log("Input data read:", inputPath);
