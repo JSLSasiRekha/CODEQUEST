@@ -18,7 +18,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 // Configure CORS to allow requests from the frontend origin
 const corsOptions = {
-  origin: 'http://localhost:8000',
+  origin: process.env.ORIGIN,
   credentials: true,
   optionsSuccessStatus: 200
 };
