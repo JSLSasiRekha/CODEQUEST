@@ -5,9 +5,11 @@ const { executeJava } = require("../execute/executeJava");
 const { executePython } = require("../execute/executePy");
 const {executeC}=require('../execute/executeC');
 const Problem=require('../models/problem');
+const { User} = require('../models/user');
 const {downloadFromFirebase}=require('../firebase/GetFile');
 const Submission=require('../models/Submission');
 const fs = require("fs");
+const { propfind } = require("../routes/user");
 
 
 function compareFilesSync(filepath1, filepath2) {
@@ -121,6 +123,44 @@ const submitCode = async (req, res) => {
       }
     }
     
+   
+
+ 
+    if (status === 'Accepted') {
+      
+     const submitted=await Submission.find({userId:userId,problemSlug:problemSlug,status:"Accepted"});
+     if(!submitted){
+      let score;
+      let updateFields = { points: 0 };
+    
+      if (problemfetched.difficulty === 'Easy') {
+        score = 20;
+        updateFields = { $inc: { points: score, easySolved: 1 } };
+      } else if (problemfetched.difficulty === 'Medium') {
+        score = 40;
+        updateFields = { $inc: { points: score, mediumSolved: 1 } };
+      } else {
+        score = 60;
+        updateFields = { $inc: { points: score, hardSolved: 1 } };
+      }
+    
+      const user = await User.findById(userId);
+      
+      if (!user) {
+        return res.status(404).send({ message: 'User not found' });
+      }
+    
+      // Increment the user's points and solved count based on difficulty
+      const updatedUser = await User.findByIdAndUpdate(
+        user._id,
+        updateFields,
+        { new: true }
+      );
+    
+      console.log("User Updated Successfully");
+    }
+    
+    }
     const submission = new Submission({
       code,
       language,
@@ -130,7 +170,6 @@ const submitCode = async (req, res) => {
       userId,
      
     });
-
     await submission.save();
     console.log("saved successfully")
     res.json({status});

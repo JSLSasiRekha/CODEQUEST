@@ -7,12 +7,27 @@ import Card from '../components/profile/Card'
 import { FaFireAlt } from "react-icons/fa";
 import { FaCode } from "react-icons/fa";
 import { useGlobalContext } from "../context";
+import {useEffect} from 'react';
+import axios from "axios";
+import { url } from "../config";
 
 const ProfilePage=()=>{
-  const { user } = useGlobalContext();
-    
-      
-      
+  const { user,saveUser } = useGlobalContext();
+  const fetchUser = async () => {
+    try {
+      const { data } = await axios.get(`${url}/api/users/${user.userName}`, {
+        withCredentials: true,
+      });
+      saveUser(data.user);
+    } catch (error) {
+      console.error("Failed to fetch user:", error);
+    }
+  }; 
+  useEffect(() => {
+  
+  
+    fetchUser();
+  }, [user]);
       
       
 return(

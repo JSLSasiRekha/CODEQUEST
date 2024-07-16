@@ -53,6 +53,7 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         saveUser,
+        fetchUser,
         user,
         isLoading,
         logoutUser,

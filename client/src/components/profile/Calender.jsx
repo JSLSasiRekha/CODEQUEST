@@ -43,12 +43,12 @@ const Calender = () => {
   return (
     <div className="flex flex-col bg-[#EFF9ED] p-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-gray-800 font-semibold my-4">Submissions this year</h2>
+        <h2 className="text-gray-800 font-semibold my-3">Submissions this year</h2>
         <p className="text-xs font-bold">
           Active days: <span className="text-[#3bb19b]">{activeDaysCount}</span>
         </p>
       </div>
-      <div className="flex flex-row gap-3 justify-between items-center w-full">
+      <div className="flex flex-row gap-3 justify-between items-center w-full mt-4">
         {days.map((dayCount, monthIndex) => {
           const startDate = new Date(2024, monthIndex, 1);
           const startDayOfWeek = startDate.getDay();
