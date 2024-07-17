@@ -7,6 +7,7 @@ import {useGlobalContext } from "./context";
 import ProfilePage from './pages/ProfilePage'
 import AdminDashboard from './pages/AdminDashboard';
 import AllProblems from './pages/Allproblems';
+import Leaderoard from './pages/Leaderboard';
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
           ) : (
             <Route path="/" element={<Navigate replace to="/login" />} />
           )}
-         <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+        <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+        <Route path="/leaderboard" element={<Leaderoard/>}/>
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/allproblems" exact element={<AllProblems/>} />
         <Route path="/login" exact element={<Login />} />

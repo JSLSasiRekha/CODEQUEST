@@ -94,7 +94,18 @@ const deleteUser = async (req, res) => {
     res.status(500).send({ message: "Internal server error" });
   }
 };
+const getAllUsers=async(req,res)=>{
+   try{
+    const users=await User.find();
+      if(!users)
+        return res.status(404).send({ message: "No Users" });
+      res.status(200).send(users);
 
-module.exports = { showCurrentUser,createUser, getUserDetails, updateUser,deleteUser };
+   }catch(error){
+    res.status(500).send({message:"Internal Server Error"});
+   }
+}
+
+module.exports = { showCurrentUser,createUser, getAllUsers,getUserDetails, updateUser,deleteUser };
 
 

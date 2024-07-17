@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { RxAvatar } from "react-icons/rx";
 import { RiAdminFill } from "react-icons/ri";
 import { FaCode } from "react-icons/fa6";
+import { FaMedal } from "react-icons/fa";
 import { useGlobalContext } from "../../context.jsx"
 
 
@@ -35,10 +36,15 @@ const Navbar=()=>{
 				size={40}
 				/>
 				</Link>
+				<Link to="/leaderboard">
+				<FaMedal 
+				size={32}
+				className='mt-2'
+				/>
+				</Link>
 				<Link to={`/user/${user?.userName}`}>
 					<RxAvatar
 					size={40}
-					className=" "
 					/>
 				</Link>
 				</div>

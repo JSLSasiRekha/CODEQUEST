@@ -5,6 +5,7 @@ import Calendar from '../components/profile/Calender'
 import SubmittedQuestions from '../components/profile/Submissions'
 import Card from '../components/profile/Card'
 import { FaFireAlt } from "react-icons/fa";
+import { GrTrophy } from "react-icons/gr";
 import { FaCode } from "react-icons/fa";
 import { useGlobalContext } from "../context";
 import {useEffect} from 'react';
@@ -43,7 +44,7 @@ return(
      <div className=''>
      <p className='text-5xl mt-6 ml-16 text-[#3bb19b] font-bold'>YOUR STANDINGS</p>
   <div className='flex gap-3 h-[150px] mt-8'>
-     <Card type={'Rank'} component={<FaCode/>} count={user.points}/>
+     <Card type={'Rank'} component={<GrTrophy/>} count={user.points}/>
      <Card type={'streak'} component={<FaFireAlt />} count={user.streak}/>
      <Card type={'problems'} component={<FaCode/>} count={user.easySolved+user.mediumSolved+user.hardSolved}/>
      </div>
