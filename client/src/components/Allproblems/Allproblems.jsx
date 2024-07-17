@@ -22,8 +22,6 @@ const Allproblems = () => {
 
     return (
         <div>
-         
-            <h1>All Problems</h1>
             <ul>
                 {problems.map(problem => (
                     <li key={problem._id}> {/* Assuming each problem has a unique '_id' */}
