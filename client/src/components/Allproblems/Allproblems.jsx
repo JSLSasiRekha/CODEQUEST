@@ -21,7 +21,7 @@ const Allproblems = () => {
     }, []); // Empty dependency array ensures this runs once on component mount
 
     return (
-        <div>
+        <div className='mt-5'>
             <ul>
                 {problems.map(problem => (
                     <li key={problem._id}> {/* Assuming each problem has a unique '_id' */}
