@@ -33,7 +33,7 @@ function App() {
         <Route path="/login" exact element={<Login />} />
         <Route path="/user/:username" exact element={<ProfilePage/>}/>
         <Route path="/problem/:slug" element={<Merged/>}/>
-        <Route path="/" element={<Navigate replace to="/login" />} />
+    
         
       </Routes>
      
