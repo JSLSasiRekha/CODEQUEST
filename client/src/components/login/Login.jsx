@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import axios from "axios";
 import styles from "./styles.module.css";
-import {url} from "../../config"
+import { url } from "../../config";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context"; // Adjust path as per your project structure
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const { saveUser } = useGlobalContext();
   const navigate = useNavigate();
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,16 +22,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     console.log(data);
-	 const response = await axios.post(`${url}/api/auth/login`, data,
-    {withCredentials:true}
-   );
-   console.log(response)
-	 const { user, token } = response.data; 
-	 saveUser(user); // Save user data to global context
-	 console.log(user); // Log user data
-	 console.log(token); // Log token
-	 navigate("/");
+      console.log(data);
+      const response = await axios.post(`${url}/api/auth/login`, data, { withCredentials: true });
+      console.log(response);
+      const { user, token } = response.data;
+      saveUser(user); // Save user data to global context
+      console.log(user); // Log user data
+      console.log(token); // Log token
+      navigate("/");
     } catch (error) {
       if (error.response && error.response.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message);
@@ -36,6 +37,10 @@ const Login = () => {
         setError("Something went wrong. Please try again later.");
       }
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -53,15 +58,22 @@ const Login = () => {
               required
               className={styles.input}
             />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={data.password}
-              onChange={handleChange}
-              required
-              className={styles.input}
-            />
+            <div className='-ml-5'>
+              <input
+                type={passwordVisible ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                value={data.password}
+                onChange={handleChange}
+                required
+                className={styles.input}
+              />
+              <FontAwesomeIcon
+                icon={passwordVisible ? faEyeSlash : faEye}
+                onClick={togglePasswordVisibility}
+                className='-ml-9'
+              />
+            </div>
             {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
               Sign In

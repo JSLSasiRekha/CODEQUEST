@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import {url} from "../../config"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Signup = () => {
 	const [data, setData] = useState({
@@ -13,12 +15,15 @@ const Signup = () => {
 		password: "",
 	});
 	const [error, setError] = useState("");
+	const [passwordVisible, setPasswordVisible] = useState(false);
 	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
-
+	const togglePasswordVisibility = () => {
+		setPasswordVisible(!passwordVisible);
+	  };
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -89,14 +94,20 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
-						<input
-							type="password"
+						 <input
+							type={passwordVisible ? "text" : "password"}
 							placeholder="Password"
 							name="password"
-							onChange={handleChange}
 							value={data.password}
+							onChange={handleChange}
 							required
 							className={styles.input}
+						/>
+						<FontAwesomeIcon
+							icon={passwordVisible ? faEyeSlash : faEye}
+							onClick={togglePasswordVisibility}
+							className='ml-64 -mt-9 mb-4'
+							
 						/>
 						{error && <div className={styles.error_msg}>{error}</div>}
 						<button type="submit" className={styles.green_btn}>
