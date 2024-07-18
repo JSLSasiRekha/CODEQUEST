@@ -27,10 +27,6 @@ const AppProvider = ({ children }) => {
         withCredentials: true,
       });
       saveUser(data.user);
-      const { data1 } = await axios.get(`${url}/api/users/${user.userName}`, {
-        withCredentials: true,
-      });
-      saveUser(data1.user);
       
       
     } catch (error) {
