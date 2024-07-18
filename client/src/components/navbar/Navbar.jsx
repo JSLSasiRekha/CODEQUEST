@@ -27,8 +27,7 @@ const Navbar=()=>{
 				{user.role==='admin' && <Link to={"/admin-dashboard"}>
 					<RiAdminFill 
 					className='ml-[10.5rem]'
-					size={40}
-					
+					size={40}	
 					/>
 				</Link>}
 				<Link to="/allproblems">

@@ -19,15 +19,73 @@ const getAllProblems = async (req, res) => {
 // Update a problem by ID
 const updateProblem = async (req, res) => {
   try {
-    const updatedProblem = await Problem.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    const { title, slug, description, difficulty, tags, companies, solution, ExampleTestCases, constraints } = req.body;
+    console.log(req.body);
+    
+   
+
+    // Fetch the problem to be updated
+    const problemToUpdate = await Problem.findOne({ slug: req.params.slug });
+    if (!problemToUpdate) {
+      return res.status(404).json({ message: 'Problem not found' });
+    }
+
+    // Process test cases if new files are uploaded
+    const testCases = [];
+    if (req.files && req.files.inputFiles && req.files.outputFiles) {
+      const { inputFiles, outputFiles } = req.files;
+
+      for (let i = 0; i < inputFiles.length; i++) {
+        const inputFilePath = inputFiles[i].path;
+        const outputFilePath = outputFiles[i].path;
+        const inputFileName = path.basename(inputFilePath);
+        const outputFileName = path.basename(outputFilePath);
+
+        // Upload input and output files to Firebase
+        const inputUrl = await saveFileToFirebase("inputs", 'txt', `./multer/uploads/${inputFileName}`);
+        const outputUrl = await saveFileToFirebase("outputs", 'txt', `./multer/uploads/${outputFileName}`);
+
+        testCases.push({
+          input: inputUrl,
+          output: outputUrl,
+        });
+      }
+    }
+
+    // Prepare update object
+    const updateData = {
+      title,
+      slug,
+      description,
+      difficulty,
+      tags: tags.split(',').map(tag => tag.trim()), // Convert comma-separated tags to array
+      companies: companies.split(',').map(company => company.trim()), // Convert comma-separated companies to array
+      solution,
+      ExampleTestCases,
+      constraints,
+    };
+
+    // Only update testCases if new files were uploaded
+    if (testCases.length > 0) {
+      updateData.testCases = testCases;
+    } else {
+      updateData.testCases = problemToUpdate.testCases;
+    }
+
+    // Find and update the problem
+    const updatedProblem = await Problem.findByIdAndUpdate(problemToUpdate._id, updateData, { new: true, runValidators: true });
     if (!updatedProblem) {
       return res.status(404).json({ message: 'Problem not found' });
     }
+
     res.status(200).json(updatedProblem);
   } catch (error) {
+    console.error('Error updating problem:', error.message);
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 // Create a new problem
 const createProblem = async (req, res) => {
@@ -92,7 +150,7 @@ const createProblem = async (req, res) => {
 // Delete a problem by ID
 const deleteProblem = async (req, res) => {
   try {
-    const deletedProblem = await Problem.findByIdAndDelete(req.params.id);
+    const deletedProblem = await Problem.findOneAndDelete({slug: req.params.slug});
     if (!deletedProblem) {
       return res.status(404).json({ message: 'Problem not found' });
     }

@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import axios from 'axios';
 import {url} from "../../config"
+import Navbar from "../navbar/Navbar";
 
 const CreateProblem= () => {
   const [formData, setFormData] = useState({
@@ -94,7 +95,9 @@ const CreateProblem= () => {
   
 
   return (
-    <form className="space-y-6 ml-44 p-6 w-3/4 shadow-md rounded-md" onSubmit={handleSubmit} encType="multipart/form-data">
+    <>
+   <Navbar/>
+    <form className="space-y-6 ml-44 p-6 w-3/4 shadow-md rounded-md bg-[#EFF9ED]" onSubmit={handleSubmit} encType="multipart/form-data">
       <h1 className='text-3xl mt-6 ml-80 text-[#3bb19b] font-bold'>Add A Problem</h1>
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">Title:</label>
@@ -248,6 +251,7 @@ const CreateProblem= () => {
         Submit
       </button>
     </form>
+    </>
   );
 };
 

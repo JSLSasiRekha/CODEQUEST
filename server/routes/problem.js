@@ -8,10 +8,10 @@ router.route('/allproblems')
   .get(getAllProblems)
   .post(cpUpload, createProblem)
 // Single problem routes
-router.get('/:slug', getProblemBySlug);
-router.route('/:id')
-  .get(getProblemById)
-  .put(updateProblem)
+
+router.route('/:slug')
+  .get(getProblemBySlug)
+  .put(cpUpload,updateProblem)
   .delete(deleteProblem);
 
 

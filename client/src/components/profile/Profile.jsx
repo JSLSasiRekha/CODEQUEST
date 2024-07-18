@@ -101,7 +101,7 @@ const Profile = () => {
           alt="Profile"
         />
         <div>
-          <h1 className="text-3xl ml-16  mt-4 font-bold">{userData.user.userName}</h1>
+          <h1 className="text-3xl  text-center  mt-4 font-bold">{userData.user.userName}</h1>
           {!editing && (
             <button
               className="bg-[#3bb19b] hover:bg-[#0a8a73] text-white font-bold py-2 px-4 rounded mt-8 ml-24"

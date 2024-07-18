@@ -8,6 +8,8 @@ import ProfilePage from './pages/ProfilePage'
 import AdminDashboard from './pages/AdminDashboard';
 import AllProblems from './pages/Allproblems';
 import Leaderoard from './pages/Leaderboard';
+import CreateProblem from './components/admin/createProblem';
+import EditProblem from './components/admin/EditProblem';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
             <Route path="/" element={<Navigate replace to="/login" />} />
           )}
         <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+        <Route path="/admin/add" element={<CreateProblem/>}/>
+        <Route path="/admin/problem/:slug" element={<EditProblem/>}/>
         <Route path="/leaderboard" element={<Leaderoard/>}/>
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/allproblems" exact element={<AllProblems/>} />
