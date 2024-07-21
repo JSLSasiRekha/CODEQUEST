@@ -128,15 +128,17 @@ const submitCode = async (req, res) => {
  
     if (status === 'Accepted') {
       
-     const submitted=await Submission.find({userId:userId,problemSlug:problemSlug,status:"Accepted"});
+     const submitted=await Submission.findOne({userId:userId,problemSlug:problemSlug,status:"Accepted"});
+     console.log(submitted)
      if(!submitted){
       let score;
       let updateFields = { points: 0 };
-    
+      console.log('entered')
       if (problemfetched.difficulty === 'Easy') {
         score = 20;
         updateFields = { $inc: { points: score, easySolved: 1 } };
       } else if (problemfetched.difficulty === 'Medium') {
+        console.log('medium');
         score = 40;
         updateFields = { $inc: { points: score, mediumSolved: 1 } };
       } else {
@@ -156,7 +158,7 @@ const submitCode = async (req, res) => {
         updateFields,
         { new: true }
       );
-    
+     console.log(updatedUser);
       console.log("User Updated Successfully");
     }
     

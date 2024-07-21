@@ -48,7 +48,8 @@ const Login = () => {
       <div className={styles.login_form_container}>
         <div className={styles.left}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
-            <h1>Login to Your Account</h1>
+          <p className='text-5xl text-center mb-8 text-[#3bb19b] font-bold'>CODE QUEST</p>
+            <h1 className='mb-6'>Login </h1>
             <input
               type="email"
               placeholder="Email"

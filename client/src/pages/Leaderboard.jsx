@@ -40,7 +40,7 @@ const Leaderboard = () => {
                     </thead>
                     <tbody className="">
                         {users.map((user, index) => (
-                            <tr key={user.userName} className={`text-center ${index % 2 === 0 ? 'bg-[#a1eec5]' : 'bg-[#f2f4f1]'}`}>
+                            <tr key={user.userName} className={`text-center ${index % 2 === 0 ? 'bg-[#EFF9ED]' : 'bg-[#f2f4f1]'}`}>
                                 <td className="py-2 px-4 border-b border-gray-200">
                                #{index + 1}</td>
                                 <td className="py-2 px-4 border-b border-gray-200">{user.userName} 

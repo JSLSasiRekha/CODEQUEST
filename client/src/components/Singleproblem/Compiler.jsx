@@ -54,11 +54,11 @@ const Compiler = () => {
   const handleSubmitCode =async () => {
     setRunning(true);
     setOutput("Submitting code...");
-    console.log("user",user.userId);
+    console.log("user",user._id);
     const payload = {
       language,
       code,
-      userId:user.userId,
+      userId:user._id,
       problemSlug:slug,
     };
     try {
